@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
+
+	"restserverfd/server"
 
 	"gopkg.in/yaml.v2"
 )
@@ -24,21 +25,17 @@ type T struct {
 }
 
 func main() {
-	handleRequests()
-}
-
-func handleRequests() {
-	http.HandleFunc("/", homePage)
-	fmt.Println("Running server at localhost:50001")
-	http.ListenAndServe(":50001", nil)
+	server.Run()
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
 	t := T{}
 
-	err := yaml.Unmarshal([]byte(data), &t)
+	err := yaml.UnmarshalStrict([]byte(data), &t)
 	if err != nil {
-		log.Fatalf("error: %v", err)
+		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprintf(w, "error: %v", err)
+	} else {
+		fmt.Fprintf(w, "Welcome! %v", t)
 	}
-	fmt.Fprintf(w, "Welcome! %v", t)
 }
