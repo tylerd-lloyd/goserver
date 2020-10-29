@@ -2,7 +2,8 @@ package main
 
 import (
 	"flag"
-	"gopkg.in/yamlserver/server"
+
+	"github.com/tylerd-lloyd/yamlserver/server"
 )
 
 func main() {

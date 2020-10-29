@@ -1,4 +1,4 @@
-module gopkg.in/yamlserver
+module github.com/tylerd-lloyd/yamlserver
 
 go 1.15
 

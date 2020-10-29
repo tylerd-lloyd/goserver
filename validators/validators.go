@@ -2,9 +2,10 @@ package validators
 
 import (
 	"fmt"
-	"gopkg.in/yamlserver/dataservice"
 	"regexp"
 	"strings"
+
+	"github.com/tylerd-lloyd/yamlserver/dataservice"
 )
 
 type argError struct {
