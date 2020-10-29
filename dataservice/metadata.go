@@ -1,10 +1,27 @@
-package utils
+package dataservice
 
-import "restserverfd/models"
+// Metadata represents application metadata expected to be unmarshaled from yaml
+type Metadata struct {
+	ID          int          `yaml:",omitempty"`
+	Title       *string      `yaml:"title,omitempty"`
+	Version     *string      `yaml:"version,omitempty"`
+	Maintainers []Maintainer `yaml:"maintainers"`
+	Company     *string      `yaml:",omitempty"`
+	Website     *string      `yaml:",omitempty"`
+	Source      *string      `yaml:",omitempty"`
+	License     *string      `yaml:",omitempty"`
+	Description *string      `yaml:",omitempty"`
+}
 
-// FilterMetadataMap returns a filtered copy of the original data map with the items that match the search params
-func FilterMetadataMap(m map[int]models.Metadata, searchParams map[string][]string) map[int]models.Metadata {
-	newMap := make(map[int]models.Metadata)
+// Maintainer is a person maintaining the application
+type Maintainer struct {
+	Name  *string `yaml:"name,omitempty"`
+	Email *string `yaml:"email,omitempty"`
+}
+
+// MetadataByQueryParams returns a filtered copy of the original data map with the items that match the search params
+func MetadataByQueryParams(m map[int]Metadata, searchParams map[string][]string) map[int]Metadata {
+	newMap := make(map[int]Metadata)
 	for k, v := range m {
 		newMap[k] = v
 	}

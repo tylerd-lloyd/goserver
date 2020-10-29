@@ -8,20 +8,20 @@ import (
 	"strconv"
 	"strings"
 
-	"restserverfd/models"
-	"restserverfd/utils"
+	"gopkg.in/yamlserver/dataservice"
+	"gopkg.in/yamlserver/validators"
 
 	"github.com/gorilla/mux"
 	"gopkg.in/yaml.v2"
 )
 
-var data []models.Metadata
-var dataMap map[int]models.Metadata
+var data []dataservice.Metadata
+var dataMap map[int]dataservice.Metadata
 var counter = 1
 
 // Run main http server
 func Run(port string) {
-	dataMap = make(map[int]models.Metadata, 100)
+	dataMap = make(map[int]dataservice.Metadata, 100)
 	router := mux.NewRouter()
 	router.HandleFunc("/api/metadata", createMetadata).Methods("POST")
 	router.HandleFunc("/api/metadata", searchMetadata).Methods("GET")
@@ -35,7 +35,7 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func createMetadata(w http.ResponseWriter, r *http.Request) {
-	t := models.Metadata{}
+	t := dataservice.Metadata{}
 	body, _ := ioutil.ReadAll(r.Body)
 	err := yaml.UnmarshalStrict(body, &t)
 	if err != nil {
@@ -45,7 +45,7 @@ func createMetadata(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := utils.ValidateMetadata(t); err != nil {
+	if err := validators.ValidateMetadata(t); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		fmt.Fprintf(w, err.Error())
 		log.Printf("BadRequest 400 - %s\n", err.Error())
@@ -89,13 +89,13 @@ func searchMetadata(w http.ResponseWriter, r *http.Request) {
 		params[strings.ToLower(p)] = v
 	}
 
-	filtered := utils.FilterMetadataMap(dataMap, params)
+	filtered := dataservice.MetadataByQueryParams(dataMap, params)
 
 	fmt.Fprint(w, buildResponse(filtered))
 	log.Printf("Success 200 - OK\n")
 }
 
-func buildResponse(data map[int]models.Metadata) string {
+func buildResponse(data map[int]dataservice.Metadata) string {
 	var itemSize int
 	var sb strings.Builder
 	sb.WriteString("items:\n")

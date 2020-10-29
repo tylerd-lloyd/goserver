@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"restserverfd/server"
+	"gopkg.in/yamlserver/server"
 )
 
 func main() {

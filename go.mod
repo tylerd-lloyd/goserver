@@ -1,4 +1,4 @@
-module restserverfd
+module gopkg.in/yamlserver
 
 go 1.15
 

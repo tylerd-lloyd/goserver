@@ -1,9 +1,9 @@
-package utils
+package validators
 
 import (
 	"fmt"
+	"gopkg.in/yamlserver/dataservice"
 	"regexp"
-	"restserverfd/models"
 	"strings"
 )
 
@@ -25,7 +25,7 @@ func writeSchemaError(sb *strings.Builder, fieldName string) {
 }
 
 // ValidateMetadata checks all fields for non-nil references and valid email address formats
-func ValidateMetadata(m models.Metadata) error {
+func ValidateMetadata(m dataservice.Metadata) error {
 	var sb strings.Builder
 	if m.Company == nil {
 		writeSchemaError(&sb, "Company")
@@ -78,6 +78,6 @@ func ValidateMetadata(m models.Metadata) error {
 	if sb.Len() == 0 {
 		return nil
 	}
-	
+
 	return &argError{sb.String()}
 }

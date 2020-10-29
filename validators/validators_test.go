@@ -1,8 +1,8 @@
-package utils_test
+package validators_test
 
 import (
-	"restserverfd/models"
-	"restserverfd/utils"
+	"gopkg.in/yamlserver/dataservice"
+	"gopkg.in/yamlserver/validators"
 	"testing"
 
 	"gopkg.in/yaml.v2"
@@ -23,21 +23,21 @@ description: |
   which supports markdown`
 
 func TestValidMetadata_ShouldNotReturnError(t *testing.T) {
-	testM := models.Metadata{}
+	testM := dataservice.Metadata{}
 	yaml.Unmarshal([]byte(testData), &testM)
-	err := utils.ValidateMetadata(testM)
+	err := validators.ValidateMetadata(testM)
 	if err != nil {
 		t.Error(err)
 	}
 }
 
 func TestValidMetadata_ShouldReturnError(t *testing.T) {
-	testM := models.Metadata{}
+	testM := dataservice.Metadata{}
 	yaml.Unmarshal([]byte(testData), &testM)
 	testM.Company = nil
 	testM.Source = nil
 
-	err := utils.ValidateMetadata(testM)
+	err := validators.ValidateMetadata(testM)
 	if err == nil {
 		t.Error("Expected error, no error returned")
 	}
