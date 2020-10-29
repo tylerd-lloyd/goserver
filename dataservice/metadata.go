@@ -84,6 +84,9 @@ func MetadataByQueryParams(m map[int]Metadata, searchParams map[string][]string)
 
 	if p, ok := searchParams["maintainer.email"]; ok {
 		for k, v := range m {
+			if len(v.Maintainers) == 0 {
+				delete(newMap, k)
+			}
 			for _, maintainer := range v.Maintainers {
 				if contains(p, *maintainer.Email) == -1 {
 					delete(newMap, k)
@@ -94,6 +97,9 @@ func MetadataByQueryParams(m map[int]Metadata, searchParams map[string][]string)
 
 	if p, ok := searchParams["maintainer.name"]; ok {
 		for k, v := range m {
+			if len(v.Maintainers) == 0 {
+				delete(newMap, k)
+			}
 			for _, maintainer := range v.Maintainers {
 				if contains(p, *maintainer.Name) == -1 {
 					delete(newMap, k)
