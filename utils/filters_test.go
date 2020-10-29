@@ -9,7 +9,7 @@ import (
 func TestFilterMetadataMap(t *testing.T) {
 	testMap := make(map[int]models.Metadata)
 	title1 := "hello world"
-	title2 := "my cool app"
+	title2 := "go server project"
 	testMap[1] = models.Metadata{Title: &title1}
 	testMap[2] = models.Metadata{Title: &title2}
 
