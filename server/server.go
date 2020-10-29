@@ -15,7 +15,6 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-var data []dataservice.Metadata
 var dataMap map[int]dataservice.Metadata
 var counter = 1
 
