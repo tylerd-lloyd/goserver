@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"strings"
 
-	"gopkg.in/yamlserver/dataservice"
-	"gopkg.in/yamlserver/validators"
+	"github.com/tylerd-lloyd/yamlserver/dataservice"
+	"github.com/tylerd-lloyd/yamlserver/validators"
 
 	"github.com/gorilla/mux"
 	"gopkg.in/yaml.v2"

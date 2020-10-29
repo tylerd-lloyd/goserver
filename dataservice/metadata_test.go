@@ -1,8 +1,9 @@
 package dataservice_test
 
 import (
-	"gopkg.in/yamlserver/dataservice"
 	"testing"
+
+	"github.com/tylerd-lloyd/yamlserver/dataservice"
 )
 
 func TestMetadataByQueryParams(t *testing.T) {

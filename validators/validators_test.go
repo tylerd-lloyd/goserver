@@ -1,9 +1,10 @@
 package validators_test
 
 import (
-	"gopkg.in/yamlserver/dataservice"
-	"gopkg.in/yamlserver/validators"
 	"testing"
+
+	"github.com/tylerd-lloyd/yamlserver/dataservice"
+	"github.com/tylerd-lloyd/yamlserver/validators"
 
 	"gopkg.in/yaml.v2"
 )
