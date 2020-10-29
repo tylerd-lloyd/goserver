@@ -1,0 +1,11 @@
+title: missing version
+maintainers:
+  - name: John
+    email: john@doe.com
+company: Boring Company
+website: golang.org
+source: github.com
+license: Apache License 2.0
+description: |
+  my multiline description
+  which supports markdown
